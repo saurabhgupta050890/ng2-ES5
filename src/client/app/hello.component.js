@@ -3,32 +3,39 @@
 (function (app) {
     const component = ng.core
         .Component({
-            selector: "hello",
-            template: "<p>{{ greeting }} world! {{ greetingFromJSON }}</p>"
+            selector: "country-app",
+            templateUrl: "app/app.component.html",
+            providers:[app.services.CountryService]
         })
         .Class({
-            constructor: [ng.http.Http, function Hello(http) {
+            constructor: [app.services.CountryService, function Hello(countryService) {
                 const vm = this;
 
-                vm.greeting = "Hello";
-                vm.greetingFromJSON = "n.a.";
+                vm.defaultCountry = 'India';
+                vm.countryService = countryService;
 
                 activate();
 
                 function activate() {
-                    const rx = http.get("app/greetings.json").share();
+                    const rx = countryService.getCountryDetails(vm.defaultCountry);
 
                     rx.subscribe(res => {
                         const greetings = res.json();
+                        console.log(greetings);
 
-                        vm.greetingFromJSON = greetings.hello;
+                        vm.greetingFromJSON = greetings;
                     });
                 }
-            }]
+
+            }],
+            searchCountry(countryName) {
+                console.log("Searching for " + countryName);
+                
+            }
         });
 
     app.HelloModule = ng.core.NgModule({
-        imports: [ng.platformBrowser.BrowserModule, ng.http.HttpModule],
+        imports: [ng.platformBrowser.BrowserModule, ng.http.HttpModule, ng.forms.FormsModule],
         declarations: [component],
         bootstrap: [component]
     })

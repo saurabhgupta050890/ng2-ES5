@@ -5,17 +5,19 @@
 
         <meta charset="utf-8" />
 
+        <link href="surface.css" rel="stylesheet">
+
         <title>Angular 2 ES5 Jumpstart</title>
     </head>
 
     <body>
-        <my-app>Loading App component...</my-app>
-        <display>Loading Display component...</display>
-        <hello>Loading Hello component...</hello>
+        <!--<my-app>Loading App component...</my-app>
+        <display>Loading Display component...</display>-->
+        <country-app style="width: 100%"><h1> Loading App ... </h1></country-app>
 
-        <foo>Mixing ng1 and ng2...</foo>
+        <!--<foo>Mixing ng1 and ng2...</foo>
 
-        <my-routes>Loading routes...</my-routes>
+        <my-routes>Loading routes...</my-routes>-->
 
         <script src="node_modules/angular/angular.min.js"></script>
 
@@ -30,10 +32,12 @@
         <script src="node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.min.js"></script>
         <script src="node_modules/@angular/router/bundles/router.umd.min.js"></script>
         <script src="node_modules/@angular/http/bundles/http.umd.min.js"></script>
+        <script src="node_modules/@angular/forms/bundles/forms.umd.js"></script>
         <script src="node_modules/@angular/upgrade/bundles/upgrade.umd.min.js"></script>
 
         <script src="app/app.component.js"></script>
         <script src="app/display.component.js"></script>
+        <script src="app/country/country.service.js"></script>
         <script src="app/hello.component.js"></script>
         <script src="app/app.routes.js"></script>
         <script src="app/boot.js"></script>
