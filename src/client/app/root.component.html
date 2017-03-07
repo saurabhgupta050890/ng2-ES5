@@ -8,17 +8,10 @@
                 <input #countryName style = "display: inline" type="text" placeholder="India">
                 <button class="btn--raised btn--blue" style="margin-left: 40px" (click)="searchCountry(countryName.value)">Search</button>
             </div>
-            <div>
-                <ul>
-                    <li *ngFor="let country of countries">
-                        <button class="btn--flat color--blue">  {{country.name}} ({{country.region}}) </button>
-                    </li>
-                </ul>
-            </div>
+            <country-list [countries]="countries" (loadDetails)="loadCountryDetails($event)"></country-list>
         </div>
         <div class="g--6 g-s--12 card no-margin">
-
+                <country-details *ngIf="countryDetails" [country]="countryDetails"></country-details>
         </div>
     </div>
 </div>
-

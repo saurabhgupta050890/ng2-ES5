@@ -1,11 +1,12 @@
 "use strict";
 
 (function (app) {
-    const component = ng.core
+    const rootComponent = ng.core
         .Component({
             selector: "country-app",
             templateUrl: "app/root.component.html",
-            providers:[app.services.CountryService]
+            providers:[app.services.CountryService],
+            directives: [app.CountryDetailComponent, app.CountryListComponent]
         })
         .Class({
             constructor: [app.services.CountryService, function Hello(countryService) {
@@ -15,22 +16,26 @@
                 vm.countryService = countryService;
 
             }],
-            searchCountry(countryName) {
+            searchCountry (countryName) {
                 countryName = countryName || this.defaultCountry;
                 console.log("Searching for " + countryName);
-                const  rx = this.countryService.getCountryDetails(countryName);
+                const rx = this.countryService.getCountryDetails(countryName);
 
                 rx.subscribe( res => {
                     this.countries = res.json();
                     //console.log(this.countries);
                 });
+            },
+            loadCountryDetails ($event) {
+                console.log($event);
+                this.countryDetails = $event;
             }
         });
 
     app.HelloModule = ng.core.NgModule({
         imports: [ng.platformBrowser.BrowserModule, ng.http.HttpModule],
-        declarations: [component],
-        bootstrap: [component]
+        declarations: [rootComponent, app.CountryDetailComponent, app.CountryListComponent],
+        bootstrap: [rootComponent]
     })
     .Class({
         constructor: function constructor() {}
