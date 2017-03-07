@@ -15,6 +15,11 @@
                 vm.defaultCountry = 'India';
                 vm.countryService = countryService;
 
+                var resetDataModel = function () {
+                    vm.countries = [];
+                    vm.countryDetails = {};
+                }
+
                 vm.searchCountry = function (countryName) {
                     countryName = countryName || vm.defaultCountry;
                     console.log("Searching for " + countryName);
@@ -22,12 +27,20 @@
 
                     rx.subscribe(function (res) {
                         vm.countries = res.json();
+                        vm.countryDetails = {};
+                    }, function (err) {
+                        resetDataModel();
                     });
                 };
 
                 vm.loadCountryDetails = function ($event) {
                     console.log($event);
                     vm.countryDetails = $event;
+                };
+
+                vm.reset = function (inputEle) {
+                    inputEle.value = null;
+                    resetDataModel();
                 };
             }]
         });

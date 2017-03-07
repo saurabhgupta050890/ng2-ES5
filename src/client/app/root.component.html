@@ -5,8 +5,9 @@
     <div class="container g--12">
         <div class="g--6 g-s--12 card no-margin">
             <div>
-                <input #countryName style = "display: inline" type="text" placeholder="India">
+                <input #countryName style = "display: inline" type="text" placeholder="India" (keyup.enter)="searchCountry(countryName.value)">
                 <button class="btn--raised btn--blue" style="margin-left: 40px" (click)="searchCountry(countryName.value)">Search</button>
+                <button class="btn--raised btn--green" style="margin-left: 40px" (click)="reset(countryName)">Reset </button>
             </div>
             <country-list [countries]="countries" (loadDetails)="loadCountryDetails($event)"></country-list>
         </div>
