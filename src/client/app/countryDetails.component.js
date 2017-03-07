@@ -13,5 +13,5 @@
             constructor: [function () {
                 console.log("Country Details Component Loaded ... ");
             }]
-        })
+        });
 })(window.app || (window.app = {}));

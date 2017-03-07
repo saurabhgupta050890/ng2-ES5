@@ -1,7 +1,7 @@
 "use strict";
 
 (function (app) {
-    const rootComponent = ng.core
+    var rootComponent = ng.core
         .Component({
             selector: "country-app",
             templateUrl: "app/root.component.html",
@@ -23,7 +23,7 @@
                 vm.searchCountry = function (countryName) {
                     countryName = countryName || vm.defaultCountry;
                     console.log("Searching for " + countryName);
-                    const rx = vm.countryService.getCountryDetails(countryName);
+                    var rx = vm.countryService.getCountryDetails(countryName);
 
                     rx.subscribe(function (res) {
                         vm.countries = res.json();
