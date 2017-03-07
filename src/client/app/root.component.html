@@ -1,0 +1,24 @@
+<div>
+    <header class="no-margin-vertical">
+        <h3 class="m--1 g--4">Country Details</h3>
+    </header>
+    <div class="container g--12">
+        <div class="g--6 g-s--12 card no-margin">
+            <div>
+                <input #countryName style = "display: inline" type="text" placeholder="India">
+                <button class="btn--raised btn--blue" style="margin-left: 40px" (click)="searchCountry(countryName.value)">Search</button>
+            </div>
+            <div>
+                <ul>
+                    <li *ngFor="let country of countries">
+                        <button class="btn--flat color--blue">  {{country.name}} ({{country.region}}) </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="g--6 g-s--12 card no-margin">
+
+        </div>
+    </div>
+</div>
+
