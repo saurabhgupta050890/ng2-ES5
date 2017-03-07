@@ -10,26 +10,26 @@
         })
         .Class({
             constructor: [app.services.CountryService, function Hello(countryService) {
-                const vm = this;
+                var vm = this;
 
                 vm.defaultCountry = 'India';
                 vm.countryService = countryService;
 
-            }],
-            searchCountry (countryName) {
-                countryName = countryName || this.defaultCountry;
-                console.log("Searching for " + countryName);
-                const rx = this.countryService.getCountryDetails(countryName);
+                vm.searchCountry = function (countryName) {
+                    countryName = countryName || vm.defaultCountry;
+                    console.log("Searching for " + countryName);
+                    const rx = vm.countryService.getCountryDetails(countryName);
 
-                rx.subscribe( res => {
-                    this.countries = res.json();
-                    //console.log(this.countries);
-                });
-            },
-            loadCountryDetails ($event) {
-                console.log($event);
-                this.countryDetails = $event;
-            }
+                    rx.subscribe(function (res) {
+                        vm.countries = res.json();
+                    });
+                };
+
+                vm.loadCountryDetails = function ($event) {
+                    console.log($event);
+                    vm.countryDetails = $event;
+                };
+            }]
         });
 
     app.HelloModule = ng.core.NgModule({

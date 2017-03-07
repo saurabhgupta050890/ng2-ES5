@@ -16,21 +16,23 @@
         })
         .Class({
             constructor: [function () {
+                var vm = this;
+                var geoCodeUrl = 'http://www.geonames.org/flags/x/';
                 console.log("Country List Component Loaded ... ");
-                this.loadDetails = new ng.core.EventEmitter();
-            }],
-            loadCountryDetails (country) {
-                console.log(country);
-                const geoCodeUrl = 'http://www.geonames.org/flags/x/';
-                this.loadDetails.emit({
-                    name: country.name,
-                    continent: country.region,
-                    flag: geoCodeUrl + country.alpha2Code.toLowerCase() + '.gif',
-                    location: {
-                        lat: country.latlng[0],
-                        long: country.latlng[1]
-                    }
-                });
-            }
-        })
+                vm.loadDetails = new ng.core.EventEmitter();
+
+                vm.loadCountryDetails = function (country) {
+                    console.log(country);
+                    vm.loadDetails.emit({
+                        name: country.name,
+                        continent: country.region,
+                        flag: geoCodeUrl + country.alpha2Code.toLowerCase() + '.gif',
+                        location: {
+                            lat: country.latlng[0],
+                            long: country.latlng[1]
+                        }
+                    });
+                };
+            }]
+        });
 })(window.app || (window.app = {}));
